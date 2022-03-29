@@ -25,7 +25,7 @@ import yaml
 
 import _init_paths
 
-import nn as mynn
+# import nn as mynn
 from utils.collections import AttrDict
 
 __C = AttrDict()
