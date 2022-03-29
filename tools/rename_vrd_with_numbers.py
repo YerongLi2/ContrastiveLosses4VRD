@@ -19,7 +19,8 @@ from shutil import copyfile
 def process_vrd_split(in_split, out_split):
     vrd_dir = 'data/vrd/sg_dataset/sg_' + in_split + '_images/'
     new_dir = 'data/vrd/'+ out_split + '_images/'
-    os.mkdir(new_dir)
+    if not os.path.exists(new_dir):
+        os.mkdir(new_dir)
     
     cnt = 1
     name_map = {}
