@@ -95,7 +95,7 @@ dependencies:
     - six==1.16.0
     - tensorboardx==2.5
     - tifffile==2020.9.3
-    - torch==0.4.1
+    - torch==0.4.1.post2
     - torchvision==0.2.0
     - tqdm==4.63.1
     - typing-extensions==4.1.1
