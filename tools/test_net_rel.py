@@ -83,7 +83,7 @@ if __name__ == '__main__':
     args = parse_args()
     logger.info('Called with args:')
     logger.info(args)
-    
+    args.multi_gpu_testing = False
     assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
 
     if args.cfg_file is not None:
