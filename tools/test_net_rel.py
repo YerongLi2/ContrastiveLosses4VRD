@@ -88,6 +88,7 @@ if __name__ == '__main__':
         args.multi_gpu_testing = False
         assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
     except:
+        print(torch.cuda.device_count() == 1, bool(args.multi_gpu_testing))
         assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
     if args.cfg_file is not None:
         merge_cfg_from_file(args.cfg_file)
