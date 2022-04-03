@@ -5,6 +5,7 @@
 """Perform inference on one or more datasets."""
 
 import argparse
+from ast import excepthandler
 import cv2
 import os
 import pprint
@@ -83,9 +84,11 @@ if __name__ == '__main__':
     args = parse_args()
     logger.info('Called with args:')
     logger.info(args)
-    args.multi_gpu_testing = False
-    assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
-
+    try:
+        args.multi_gpu_testing = False
+        assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
+    except:
+        assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
     if args.cfg_file is not None:
         merge_cfg_from_file(args.cfg_file)
     if args.set_cfgs is not None:
