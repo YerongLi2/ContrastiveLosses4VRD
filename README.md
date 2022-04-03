@@ -47,7 +47,7 @@ git clone https://github.com/NVIDIA/ContrastiveLosses4VRD.git --recurse-submodul
   * numpy
   * scipy
   * opencv
-  * pyyaml
+  * pyyaml==5.4.1
   * packaging
   * [pycocotools](https://github.com/cocodataset/cocoapi)
   * tensorboardX
@@ -60,7 +60,7 @@ An easy installation if you already have Anaconda Python 3 and CUDA 9.0:
 ```
 conda install pytorch=0.4.1
 pip install cython
-pip install matplotlib numpy scipy pyyaml packaging pycocotools tensorboardX tqdm pillow scikit-image
+pip install matplotlib numpy scipy pyyaml==5.4.1 packaging pycocotools tensorboardX tqdm pillow scikit-image
 conda install opencv
 ```
 
