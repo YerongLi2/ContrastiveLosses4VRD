@@ -18,7 +18,7 @@
 ##############################################################################
 
 """Test a Detectron network on an imdb (image database)."""
-
+import sys
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -93,6 +93,8 @@ def run_inference(
             all_results = []
             for i in range(len(cfg.TEST.DATASETS)):
                 dataset_name, proposal_file = get_inference_dataset(i)
+                print(dataset_name)
+                sys.exit(1)
                 output_dir = args.output_dir
                 results = parent_func(
                     args,
