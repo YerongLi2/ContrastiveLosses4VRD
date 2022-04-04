@@ -312,6 +312,7 @@ def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     """Get the roidb for the dataset specified in the global cfg. Optionally
     restrict it to a range of indices if ind_range is a pair of integers.
     """
+    logger.info('Load dataset with annotations with JsonDatasetRel')
     dataset = JsonDatasetRel(dataset_name)
     roidb = dataset.get_roidb(gt=do_val)
 
