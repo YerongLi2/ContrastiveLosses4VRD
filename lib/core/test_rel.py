@@ -56,7 +56,7 @@ def im_detect_rels(model, im, dataset_name, box_proposals, do_vis=False, timers=
     
     if timers is None:
         timers = defaultdict(Timer)
-    
+    print('box_proposals', box_proposals)
     timers['im_detect_rels'].tic()
     rel_results = im_get_det_rels(model, im, dataset_name, cfg.TEST.SCALE, cfg.TEST.MAX_SIZE, box_proposals, do_vis, roidb, use_gt_labels)
     timers['im_detect_rels'].toc()
