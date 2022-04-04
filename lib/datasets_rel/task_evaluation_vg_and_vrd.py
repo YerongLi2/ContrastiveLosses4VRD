@@ -10,6 +10,7 @@ import numpy as np
 import logging
 from six.moves import cPickle as pickle
 import json
+import sys
 import csv
 from tqdm import tqdm
 
@@ -43,6 +44,8 @@ def eval_rel_results(all_results, output_dir, do_val):
         eval_sets = (False, True)
 
     for phrdet in eval_sets:
+        print(phrdet)
+        sys.exit()
         eval_metric = 'phrdet' if phrdet else 'reldet'
         print('================== {} =================='.format(eval_metric))
 
