@@ -44,7 +44,7 @@ def eval_rel_results(all_results, output_dir, do_val):
         eval_sets = (False, True)
 
     for phrdet in eval_sets:
-        print(phrdet)
+        print('phrdet', phrdet)
         sys.exit()
         eval_metric = 'phrdet' if phrdet else 'reldet'
         print('================== {} =================='.format(eval_metric))
