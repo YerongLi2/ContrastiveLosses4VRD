@@ -109,6 +109,13 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
     if return_dict['sbj_rois'] is not None:
         sbj_boxes = return_dict['sbj_rois'].data.cpu().numpy()[:, 1:5] / im_scale
         print('sbj_boxes', sbj_boxes)
+#         sbj_boxes [[332.132 173.546 629.439 638.034]                                                                                                          
+#         [332.132 173.546 629.439 638.034]                                                                                                                    
+#         [332.132 173.546 629.439 638.034]                                                                                                                    
+#         ...                                                                                                                                                  
+#         [233.36  211.718 438.874 431.65 ]                                                                                                                    
+#         [233.36  211.718 438.874 431.65 ]                                                                                                                    
+#         [233.36  211.718 438.874 431.65 ]]
         sbj_labels = return_dict['sbj_labels'].data.cpu().numpy() - 1
         sbj_scores = return_dict['sbj_scores'].data.cpu().numpy()
         obj_boxes = return_dict['obj_rois'].data.cpu().numpy()[:, 1:5] / im_scale
