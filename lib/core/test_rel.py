@@ -98,7 +98,10 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
     if use_gt_labels:
         inputs['use_gt_labels'] = [use_gt_labels]
 
-    print('inputs.keys()', inputs.keys())
+    # print('inputs.keys()', inputs.keys())
+    # inputs.keys() dict_keys(['data', 'im_info', 'dataset_name', 'do_vis'])
+    print("inputs['do_vis']" , inputs['do_vis'])
+
     return_dict = model(**inputs)
     
     return_dict2 = {}
