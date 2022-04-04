@@ -163,7 +163,7 @@ if __name__ == '__main__':
             det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_sgcls.pkl')
     else:
         det_file = os.path.join(args.output_dir, 'rel_detections.pkl')
-    if os.path.exists(det_file):
+    if False and os.path.exists(det_file):
         logger.info('Loading results from {}'.format(det_file))
         with open(det_file, 'rb') as f:
             all_results = pickle.load(f)

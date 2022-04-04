@@ -82,7 +82,7 @@ def run_inference(
         check_expected_results=False):
     parent_func, child_func = get_eval_functions()
     is_parent = ind_range is None
-
+    logger.info('Entering run_inference')
     def result_getter():
         if is_parent:
             # Parent case:
