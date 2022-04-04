@@ -44,8 +44,7 @@ def eval_rel_results(all_results, output_dir, do_val):
         eval_sets = (False, True)
 
     for phrdet in eval_sets:
-        print('phrdet', phrdet)
-        sys.exit()
+    
         eval_metric = 'phrdet' if phrdet else 'reldet'
         print('================== {} =================='.format(eval_metric))
 
@@ -58,7 +57,8 @@ def eval_rel_results(all_results, output_dir, do_val):
 
             topk_dets = []
             for im_i, res in enumerate(tqdm(all_results)):
-
+                print('im_i', im_i.shape)
+                sys.exit()
                 # in oi_all_rel some images have no dets
                 if res['prd_scores'] is None:
                     det_boxes_s_top = np.zeros((0, 4), dtype=np.float32)
