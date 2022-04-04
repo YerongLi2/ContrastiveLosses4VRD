@@ -267,7 +267,6 @@ class Generalized_RCNN(nn.Module):
                 return self._forward(data, im_info, do_vis, dataset_name, roidb, use_gt_labels, **rpn_kwargs)
 
     def _forward(self, data, im_info, do_vis=False, dataset_name=None, roidb=None, use_gt_labels=False, **rpn_kwargs):
-        print(use_gt_labels, 'use_gt_labels')
         im_data = data
         if self.training:
             roidb = list(map(lambda x: blob_utils.deserialize(x)[0], roidb))

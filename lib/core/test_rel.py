@@ -102,11 +102,11 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
     # inputs.keys() dict_keys(['data', 'im_info', 'dataset_name', 'do_vis'])
     # print("inputs['do_vis']" , inputs['do_vis'])
     # print("inputs['do_vis']" , False)
-
+    print('model type', type(model))
     return_dict = model(**inputs)
     
     return_dict2 = {}
-    if return_dict['sbj_rois'] is not None:
+    if return_dict['sbj_rois'] is not None: ## DEBUG
         sbj_boxes = return_dict['sbj_rois'].data.cpu().numpy()[:, 1:5] / im_scale
         # print('sbj_boxes', sbj_boxes)
         # sbj_boxes [[332.132 173.546 629.439 638.034]                                                                                                          
