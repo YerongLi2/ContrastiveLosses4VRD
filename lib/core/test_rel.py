@@ -102,7 +102,10 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
     # inputs.keys() dict_keys(['data', 'im_info', 'dataset_name', 'do_vis'])
     # print("inputs['do_vis']" , inputs['do_vis'])
     # print("inputs['do_vis']" , False)
-    print('model type', type(model))
+    
+    # print('model type', type(model))
+    # model type <class 'nn.parallel.data_parallel.DataParallel'>                                                                                           
+
     return_dict = model(**inputs)
     
     return_dict2 = {}
