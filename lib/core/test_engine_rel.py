@@ -94,8 +94,8 @@ def run_inference(
             all_results = []
             for i in range(len(cfg.TEST.DATASETS)):
                 dataset_name, proposal_file = get_inference_dataset(i)
-                print(dataset_name)
-                sys.exit(1)
+                # print(dataset_name)
+                # vrd_val
                 output_dir = args.output_dir
                 results = parent_func(
                     args,
