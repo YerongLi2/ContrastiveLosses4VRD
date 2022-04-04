@@ -216,7 +216,7 @@ def test_net(
     """Run inference on all images in a dataset or over an index range of images
     in a dataset using a single GPU.
     """
-    logger('Entering test_net')
+    logger.info('Entering test_net')
     assert not cfg.MODEL.RPN_ONLY, \
         'Use rpn_generate to generate proposals from RPN-only models'
 
