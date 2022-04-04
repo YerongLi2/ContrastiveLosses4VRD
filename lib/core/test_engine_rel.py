@@ -236,7 +236,6 @@ def test_net(
         ## Read the image
         im = cv2.imread(entry['image'])
         if True or args.use_gt_boxes:## DEBUG
-            logger.info('Always load the ground truth')
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers, entry, args.use_gt_labels)
         else:
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers)
@@ -254,6 +253,7 @@ def test_net(
         all_results[i] = im_results
 
         if i % 10 == 0:  # Reduce log file size
+            logger.info('Always load the ground truth')
             ave_total_time = np.sum([t.average_time for t in timers.values()])
             eta_seconds = ave_total_time * (num_images - i - 1)
             eta = str(datetime.timedelta(seconds=int(eta_seconds)))
