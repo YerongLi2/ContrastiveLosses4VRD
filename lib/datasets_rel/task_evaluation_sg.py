@@ -254,7 +254,6 @@ def eval_rel_results(all_results, output_dir, do_val=True, do_vis=False, do_spec
 
 
 def print_stats(recalls):
-    # print('====================== ' + 'sgdet' + ' ============================')
     k_str = ''
     for k in recalls.keys():
         if k == 50:
