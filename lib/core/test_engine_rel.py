@@ -226,6 +226,8 @@ def test_net(
     roidb, dataset, start_ind, end_ind, total_num_images = get_roidb_and_dataset(
         dataset_name, proposal_file, ind_range, args.do_val
     )
+
+    # What is the model
     model = initialize_model_from_cfg(args, gpu_id=gpu_id)
     
     num_images = len(roidb)
