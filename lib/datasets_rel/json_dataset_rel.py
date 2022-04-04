@@ -93,6 +93,7 @@ class JsonDatasetRel(object):
 
         assert ANN_FN2 in DATASETS[name] and ANN_FN3 in DATASETS[name]
         with open(DATASETS[name][ANN_FN2]) as f:
+            print(' ==================================================== load anonoataitaon')
             self.rel_anns = json.load(f)
         with open(DATASETS[name][ANN_FN3]) as f:
             prd_categories = json.load(f)
