@@ -156,6 +156,7 @@ if __name__ == '__main__':
     args.cuda = True
 
     if args.use_gt_boxes:
+        print('use_gt_boxes')
         if args.use_gt_labels:
             det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_prdcls.pkl')
         else:
