@@ -233,9 +233,9 @@ def test_net(
     timers = defaultdict(Timer)
     for i, entry in enumerate(roidb):
         box_proposals = None
-
+        ## Read the image
         im = cv2.imread(entry['image'])
-        if args.use_gt_boxes:
+        if True or args.use_gt_boxes:
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers, entry, args.use_gt_labels)
         else:
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers)
