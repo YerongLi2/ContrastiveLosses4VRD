@@ -101,6 +101,7 @@ def run_inference(
                     output_dir,
                     multi_gpu=multi_gpu_testing
                 )
+                print('result', results)
                 all_results.append(results)
 
             return all_results
