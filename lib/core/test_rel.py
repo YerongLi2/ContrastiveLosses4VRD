@@ -100,13 +100,15 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
 
     # print('inputs.keys()', inputs.keys())
     # inputs.keys() dict_keys(['data', 'im_info', 'dataset_name', 'do_vis'])
-    print("inputs['do_vis']" , inputs['do_vis'])
+    # print("inputs['do_vis']" , inputs['do_vis'])
+    # print("inputs['do_vis']" , False)
 
     return_dict = model(**inputs)
     
     return_dict2 = {}
     if return_dict['sbj_rois'] is not None:
         sbj_boxes = return_dict['sbj_rois'].data.cpu().numpy()[:, 1:5] / im_scale
+        print('sbj_boxes', sbj_boxes)
         sbj_labels = return_dict['sbj_labels'].data.cpu().numpy() - 1
         sbj_scores = return_dict['sbj_scores'].data.cpu().numpy()
         obj_boxes = return_dict['obj_rois'].data.cpu().numpy()[:, 1:5] / im_scale
