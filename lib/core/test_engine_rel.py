@@ -89,6 +89,7 @@ def run_inference(
             # In this case we're either running inference on the entire dataset in a
             # single process or (if multi_gpu_testing is True) using this process to
             # launch subprocesses that each run inference on a range of the dataset
+            logger.info('Is Parent case')
             all_results = []
             for i in range(len(cfg.TEST.DATASETS)):
                 dataset_name, proposal_file = get_inference_dataset(i)
