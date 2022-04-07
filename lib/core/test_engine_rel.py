@@ -246,7 +246,7 @@ def test_net(
         # print(im_results.keys())
         # dict_keys(['sbj_boxes', 'sbj_labels', 'sbj_scores', 'obj_boxes', 'obj_labels', 'obj_scores', 'prd_scores', 'prd_scores_ttl', 'prd_scores_bias', 'prd_s
 # cores_spt'])
-        print(im_results)
+        print(im_results['sbj_labels'])
         im_results.update(dict(image=entry['image']))
         # add gt
         if args.do_val:
