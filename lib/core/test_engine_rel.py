@@ -248,7 +248,22 @@ def test_net(
         # dict_keys(['sbj_boxes', 'sbj_labels', 'sbj_scores', 'obj_boxes', 'obj_labels', 'obj_scores', 'prd_scores', 'prd_scores_ttl', 'prd_scores_bias', 'prd_s
 # cores_spt'])
         print(im_results['sbj_labels'])
+        print(im_results['sbj_boxes'])
         # [3 3 8 8 0 0 0 0 8 8 8]
+
+
+        # --use_gt_boxes
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000002.jpg                                              
+        # INFO test_engine_rel.py: 246: im_results 
+        #                                                                                                              
+        # [65  5  0]                                                                                                                                            
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000003.jpg                                              
+        # INFO test_engine_rel.py: 246: im_results
+        # [ 0  0  0  0 10 95]
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000004.jpg
+        # INFO test_engine_rel.py: 246: im_results
+        # [ 4  8 21]
+
         im_results.update(dict(image=entry['image']))
         # add gt
         if args.do_val:
