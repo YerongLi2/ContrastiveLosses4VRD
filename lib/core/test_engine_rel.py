@@ -227,7 +227,7 @@ def test_net(
     roidb, dataset, start_ind, end_ind, total_num_images = get_roidb_and_dataset(
         dataset_name, proposal_file, ind_range, args.do_val
     )
-    print('Loaded bounding box in the dataset', list(dataset.rel_anns.items())[:2])
+    # print('Loaded bounding box in the dataset', list(dataset.rel_anns.items())[:2])
     # What is the model
     model = initialize_model_from_cfg(args, gpu_id=gpu_id)
     
@@ -242,7 +242,8 @@ def test_net(
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers, entry, args.use_gt_labels)
         else:
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers)
-        
+        logger.info('im_results')
+        print(im_results.keys())
         im_results.update(dict(image=entry['image']))
         # add gt
         if args.do_val:
@@ -312,6 +313,10 @@ def initialize_model_from_cfg(args, gpu_id=0):
 def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     """Get the roidb for the dataset specified in the global cfg. Optionally
     restrict it to a range of indices if ind_range is a pair of integers.
+    Param dataset_name DATASETS.keys in file lib/datasets_rel/dataset_catalog_rel.py
+    Return roidb
+    Return loaced dataset from the original datafiles
+            dataset.rel_anns contains the bounding boxes inside each image
     """
     logger.info('Load dataset with annotations with JsonDatasetRel')
     dataset = JsonDatasetRel(dataset_name)
