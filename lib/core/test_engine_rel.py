@@ -227,7 +227,7 @@ def test_net(
     roidb, dataset, start_ind, end_ind, total_num_images = get_roidb_and_dataset(
         dataset_name, proposal_file, ind_range, args.do_val
     )
-    print('Loaded bounding box in the dataset', dataset.rel_anns[:10])
+    print('Loaded bounding box in the dataset', list(dataset.rel_anns.items())[:2])
     # What is the model
     model = initialize_model_from_cfg(args, gpu_id=gpu_id)
     
