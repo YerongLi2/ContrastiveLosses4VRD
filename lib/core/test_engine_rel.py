@@ -144,6 +144,7 @@ def test_net_on_dataset(
             args, dataset_name, proposal_file, num_images, output_dir
         )
     else:
+        logger.info('Entering the branch of test_net')
         all_results = test_net(
             args, dataset_name, proposal_file, output_dir, gpu_id=gpu_id
         )
