@@ -372,7 +372,7 @@ def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     logger.info('Load dataset with annotations with JsonDatasetRel')
     dataset = JsonDatasetRel(dataset_name)
     logger.info('Last time loading the dataset')
-    logger.info(dataset.keys())
+    logger.info(dataset.rel_anns)
     roidb = dataset.get_roidb(gt=do_val)
 
     if ind_range is not None:
