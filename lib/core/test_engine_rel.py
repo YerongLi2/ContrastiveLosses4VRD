@@ -264,6 +264,37 @@ def test_net(
         # INFO test_engine_rel.py: 246: im_results
         # [ 4  8 21]
 
+        # --use_gt_boxes
+
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000001.jpg                                                                                                                [18/1795]
+        # /scratch/yerong/local/anaconda3/envs/vr1/lib/python3.6/site-packages/torch/nn/functional.py:1006: UserWarning: nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.                                                   
+        # warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")                                                                    
+        # INFO test_engine_rel.py: 246: im_results                                                                                                              
+        # [2]                                                                                                                                                   
+        # [[  8. 456. 101. 487.]]                                                                                                                               
+        # INFO test_engine_rel.py: 289: im_detect: range [1, 1000] of 1000: 1/1000 0.438s (eta: 0:07:17)                                                        
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000002.jpg                                              
+        # INFO test_engine_rel.py: 246: im_results                                                                                                              
+        # [65  5  0]                                                                                                                                            
+        # [[ 583.  410.  714.  525.]                                                                                                                            
+        # [ 482.  265.  891.  762.]                                                                                                                            
+        # [ 660.  440. 1020.  767.]]                                                                                                                           
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000003.jpg                                                                                                                         
+        # INFO test_engine_rel.py: 246: im_results                                                                                                              
+        # [ 0  0  0  0 10 95]                                                                                                                                                      
+        # [[1.000e+00 1.010e+02 1.100e+02 6.010e+02]                                          
+        # [1.000e+00 1.010e+02 1.100e+02 6.010e+02]                                                      
+        # [7.070e+02 2.410e+02 8.460e+02 5.500e+02]                                                      
+        # [8.650e+02 2.670e+02 1.024e+03 6.750e+02]                                                      
+        # [9.530e+02 3.200e+02 1.021e+03 3.610e+02]                                                                                                            
+        # [9.600e+02 4.920e+02 9.960e+02 5.540e+02]]                                                                                                                              
+        # INFO test_engine_rel.py: 241: /scratch/yerong/ContrastiveLosses4VRD/data/vrd/val_images/000000000004.jpg                                                                                                                         
+        # INFO test_engine_rel.py: 246: im_results                                                                        
+        # [ 4  8 21]                                      
+        # [[329. 323. 650. 519.]                          
+        # [719. 422. 774. 455.]                                                                                                                                                                           
+        # [494. 455. 524. 520.]]     
+
         im_results.update(dict(image=entry['image']))
         # add gt
         if args.do_val:
@@ -340,6 +371,8 @@ def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     """
     logger.info('Load dataset with annotations with JsonDatasetRel')
     dataset = JsonDatasetRel(dataset_name)
+    logger.info('Last time loading the dataset')
+    logger.info(dataset.keys())
     roidb = dataset.get_roidb(gt=do_val)
 
     if ind_range is not None:
