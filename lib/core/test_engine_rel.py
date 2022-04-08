@@ -342,7 +342,8 @@ def initialize_model_from_cfg(args, gpu_id=0):
     """
     model = model_builder_rel.Generalized_RCNN()
     model.eval()
-
+    logger.info('Show args use_gt_boxes')
+    print(args)
     if args.cuda:
         model.cuda()
 
@@ -373,6 +374,12 @@ def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     dataset = JsonDatasetRel(dataset_name)
     logger.info('Last time loading the dataset')
     logger.info(dataset.rel_anns['000000000002.jpg'])
+    # [{'predicate': 0, 'object': {'category': 40, 'bbox': [265, 762, 482, 891]}, 
+    # 'subject': {'category': 65, 'bbox': [410, 525, 583, 714]}}, 
+    # {'predicate': 2, 'object': {'category': 65, 'bbox': [410, 525, 583, 714]}, 
+    # 'subject': {'category': 40, 'bbox': [265, 762, 482, 891]}}, 
+    # {'predicate': 27, 'object': {'category': 40, 'bbox': [265, 762, 482, 891]}, 
+    # 'subject': {'category': 0, 'bbox': [440, 767, 660, 1020]}}]
     roidb = dataset.get_roidb(gt=do_val)
 
     if ind_range is not None:
