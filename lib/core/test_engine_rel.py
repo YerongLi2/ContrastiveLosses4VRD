@@ -344,6 +344,10 @@ def initialize_model_from_cfg(args, gpu_id=0):
     model.eval()
     logger.info('Show args use_gt_boxes')
     print(args)
+    #     Namespace(cfg_file='configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_IN_pr
+    # etrained.yaml', cuda=True, dataset='vrd', do_special=False, do_val=True, do_vis=False, load_ckpt='trained_models/vrd_VGG16_IN_pretrained/model_step755
+    # 9.pth', load_detectron=None, multi_gpu_testing=False, output_dir='Outputs/vrd_VGG16_IN_pretrained', range=None, set_cfgs=[], test_net_file='./tools/te
+    # st_net_rel', use_gt_boxes=True, use_gt_labels=False
     if args.cuda:
         model.cuda()
 
