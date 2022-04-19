@@ -10,7 +10,6 @@ from PIL import Image
 from tqdm import tqdm
 
 
-
 # [ymin, ymax, xmin, xmax] to [x, y, w, h]
 def box_transform(box):
     x = box[2]

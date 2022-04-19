@@ -59,7 +59,7 @@ def parse_args():
         help='start (inclusive) and end (exclusive) indices',
         type=int, nargs=2)
     parser.add_argument(
-        '--multi-gpu-testing', help='using multiple gpus for inference',
+        '--multi_gpu_testing', help='using multiple gpus for inference',
         action='store_true')
     parser.add_argument(
         '--do_val', dest='do_val', help='do evaluation', action='store_true')
@@ -85,10 +85,9 @@ if __name__ == '__main__':
     logger.info('Called with args:')
     logger.info(args)
     try:
-        args.multi_gpu_testing = False
         assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
     except:
-        print(torch.cuda.device_count() == 1, bool(args.multi_gpu_testing))
+        print(torch.cuda.device_count() == 1, args.multi_gpu_testing)
         assert (torch.cuda.device_count() == 1) ^ bool(args.multi_gpu_testing)
     if args.cfg_file is not None:
         merge_cfg_from_file(args.cfg_file)

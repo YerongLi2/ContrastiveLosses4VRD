@@ -28,8 +28,8 @@ SOLVER:
   MAX_ITER: 62723  # 62723 images
   STEPS: [0, 41815, 55754]
 VGG16:
-  VG_PRETRAINED_WEIGHTS: os.getenv('HOME') + '/detection_models/vg/VGG16/model_step479999.pth'
-  VG_PRD_PRETRAINED_WEIGHTS: '~/detection_models/vg/VGG16/model_step479999.pth'
+  VG_PRETRAINED_WEIGHTS: './detection_models/vg/VGG16/model_step479999.pth'
+  VG_PRD_PRETRAINED_WEIGHTS: './detection_models/vg/VGG16/model_step479999.pth'
 FAST_RCNN:
   ROI_BOX_HEAD: VGG16.VGG16_roi_conv5_head
   ROI_XFORM_METHOD: RoIAlign
