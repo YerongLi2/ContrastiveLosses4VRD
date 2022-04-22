@@ -247,8 +247,8 @@ def test_net(
         # print(im_results.keys())
         # dict_keys(['sbj_boxes', 'sbj_labels', 'sbj_scores', 'obj_boxes', 'obj_labels', 'obj_scores', 'prd_scores', 'prd_scores_ttl', 'prd_scores_bias', 'prd_s
 # cores_spt'])
-        print(im_results['sbj_labels'])
-        print(im_results['sbj_boxes'])
+#         print(im_results['sbj_labels'])
+#         print(im_results['sbj_boxes'])
         # [3 3 8 8 0 0 0 0 8 8 8]
 
 
@@ -342,8 +342,8 @@ def initialize_model_from_cfg(args, gpu_id=0):
     """
     model = model_builder_rel.Generalized_RCNN()
     model.eval()
-    logger.info('Show args use_gt_boxes')
-    print(args)
+    # logger.info('Show args use_gt_boxes')
+    # print(args)
     #     Namespace(cfg_file='configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_IN_pr
     # etrained.yaml', cuda=True, dataset='vrd', do_special=False, do_val=True, do_vis=False, load_ckpt='trained_models/vrd_VGG16_IN_pretrained/model_step755
     # 9.pth', load_detectron=None, multi_gpu_testing=False, output_dir='Outputs/vrd_VGG16_IN_pretrained', range=None, set_cfgs=[], test_net_file='./tools/te
