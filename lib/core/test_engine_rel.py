@@ -55,7 +55,7 @@ from utils.io import save_object
 from utils.timer import Timer
 
 logger = logging.getLogger(__name__)
-
+torch.backends.cudnn.benchmark = True
 
 def get_eval_functions():
     # Determine which parent or child function should handle inference
