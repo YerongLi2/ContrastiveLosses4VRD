@@ -377,7 +377,7 @@ def get_roidb_and_dataset(dataset_name, proposal_file, ind_range, do_val=True):
     logger.info('Load dataset with annotations with JsonDatasetRel')
     dataset = JsonDatasetRel(dataset_name)
     logger.info('Last time loading the dataset')
-    logger.info(dataset.rel_anns['000000000002.jpg'])
+    # logger.info(dataset.rel_anns['000000000002.jpg'])
     # [{'predicate': 0, 'object': {'category': 40, 'bbox': [265, 762, 482, 891]}, 
     # 'subject': {'category': 65, 'bbox': [410, 525, 583, 714]}}, 
     # {'predicate': 2, 'object': {'category': 65, 'bbox': [410, 525, 583, 714]}, 
