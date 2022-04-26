@@ -32,6 +32,7 @@ topk = 100
 def eval_rel_results(all_results, output_dir, do_val):
     logger.info('all results...')
     print(type(all_results))
+    sys.exit()
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20)
     elif cfg.TEST.DATASETS[0].find('vrd') >= 0:
