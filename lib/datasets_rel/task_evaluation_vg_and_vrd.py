@@ -60,7 +60,9 @@ def eval_rel_results(all_results, output_dir, do_val):
                 all_gt_cnt = 0
 
             topk_dets = []
-            for im_i, res in enumerate(tqdm(all_results)):
+            # for im_i, res in enumerate(tqdm(all_results)):
+            for im_i, res in enumerate(tqdm(all_results[:20])):
+
                 # in oi_all_rel some images have no dets'
                 # print(res['prd_scores'] is None)
                 if res['prd_scores'] is None:
