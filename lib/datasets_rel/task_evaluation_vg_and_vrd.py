@@ -33,6 +33,8 @@ def eval_rel_results(all_results, output_dir, do_val):
     logger.info('all results...')
     print(type(all_results))
     print(all_results[0])
+    sys.exit()
+    ## Testing configuration
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20)
     elif cfg.TEST.DATASETS[0].find('vrd') >= 0:
@@ -60,7 +62,7 @@ def eval_rel_results(all_results, output_dir, do_val):
             topk_dets = []
             for im_i, res in enumerate(tqdm(all_results)):
                 # in oi_all_rel some images have no dets'
-                print(res['prd_scores'] is None)
+                # print(res['prd_scores'] is None)
                 if res['prd_scores'] is None:
                     det_boxes_s_top = np.zeros((0, 4), dtype=np.float32)
                     det_boxes_o_top = np.zeros((0, 4), dtype=np.float32)
