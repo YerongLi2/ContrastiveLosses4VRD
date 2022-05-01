@@ -239,7 +239,7 @@ def test_net(
         ## Read the image
         im = cv2.imread(entry['image'])
         # logger.info(entry['image'])
-        if True or args.use_gt_boxes:## DEBUG
+        if args.use_gt_boxes:## DEBUG
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers, entry, args.use_gt_labels)
         else:
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers)
@@ -297,6 +297,7 @@ def test_net(
 
         im_results.update(dict(image=entry['image']))
         # add gt
+        logger.info('im_results: {}'.format(im_results.keys()))
         if args.do_val:
             im_results.update(
                 dict(gt_sbj_boxes=entry['sbj_gt_boxes'],
