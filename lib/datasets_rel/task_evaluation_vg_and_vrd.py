@@ -34,6 +34,7 @@ def eval_rel_results(all_results, output_dir, do_val):
     # print(type(all_results))
     # print(all_results[0])
     print(len(all_results[0]['prd_scores']))
+    print(all_results[0]['prd_scores'])
     # sys.exit()
     ## Testing configuration
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
