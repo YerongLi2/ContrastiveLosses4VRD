@@ -105,7 +105,8 @@ def im_get_det_rels(model, im, dataset_name, target_scale, target_max_size, boxe
     
     # print('model type', type(model))
     # model type <class 'nn.parallel.data_parallel.DataParallel'>                                                                                           
-
+    logger.info('inputs.keys()', inputs.keys())
+    print(inputs)
     return_dict = model(**inputs)
     
     return_dict2 = {}

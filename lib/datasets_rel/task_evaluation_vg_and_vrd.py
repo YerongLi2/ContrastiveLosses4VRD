@@ -33,7 +33,7 @@ def eval_rel_results(all_results, output_dir, do_val):
     logger.info('all results...')
     # print(type(all_results))
     print(all_results[0])
-    # print(len(all_results[0]['prd_scores']))
+    # print(len(all_res0pults[0]['prd_scores']))
     # print(all_results[0]['prd_scores'])
     # sys.exit()
     ## Testing configuration
