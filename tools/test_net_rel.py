@@ -147,7 +147,7 @@ if __name__ == '__main__':
         os.makedirs(args.output_dir)
 
     logger.info('Testing with config:')
-    logger.info(pprint.pformat(cfg))
+    # logger.info(pprint.pformat(cfg))
 
     # For test_engine.multi_gpu_test_net_on_dataset
     args.test_net_file, _ = os.path.splitext(__file__)

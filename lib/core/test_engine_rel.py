@@ -238,6 +238,7 @@ def test_net(
         box_proposals = None
         ## Read the image
         im = cv2.imread(entry['image'])
+
         # logger.info(entry['image'])
         if args.use_gt_boxes:## DEBUG
             im_results = im_detect_rels(model, im, dataset_name, box_proposals, args.do_vis, timers, entry, args.use_gt_labels)
