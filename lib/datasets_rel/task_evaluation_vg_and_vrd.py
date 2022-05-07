@@ -184,8 +184,8 @@ def _compute_pred_matches(gt_triplets, pred_triplets,
     gt_has_match = keeps.any(1)
     pred_to_gt = [[] for x in range(pred_boxes.shape[0])]
     logger.info('Computing matches...')
-    print(gt_triplets)
-    print(pred_triplets)
+    print(gt_boxes)
+    print(pred_boxes)
     for gt_ind, gt_box, keep_inds in zip(np.where(gt_has_match)[0],
                                          gt_boxes[gt_has_match],
                                          keeps[gt_has_match],
