@@ -79,18 +79,23 @@ def eval_rel_results(all_results, output_dir, do_val):
                     det_boxes_obj = res['obj_boxes']  # (#num_rel, 4)
                     det_labels_sbj = res['sbj_labels']  # (#num_rel,)
                     det_labels_obj = res['obj_labels']  # (#num_rel,)
+                    logger.info('sbj_scores')
                     det_scores_sbj = res['sbj_scores']  # (#num_rel,)
                     det_scores_obj = res['obj_scores']  # (#num_rel,)
                     if 'prd_scores_ttl' in res:
+                        # [51]
+
                         det_scores_prd = res['prd_scores_ttl'][:, 1:]
                     else:
                         det_scores_prd = res['prd_scores'][:, 1:]
 
                     det_labels_prd = np.argsort(-det_scores_prd, axis=1)
                     det_scores_prd = -np.sort(-det_scores_prd, axis=1)
-
-                    det_scores_so = det_scores_sbj * det_scores_obj
+                    # [s, R(PREDICATE), O]
+                    det_scores_so = det_scores_sbj * det_scores_obj #
                     det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k]
+                    logger.info('det_scores_spo')
+                    print(det_scores_spo)
                     det_scores_inds = argsort_desc(det_scores_spo)[:topk]
                     det_scores_top = det_scores_spo[det_scores_inds[:, 0], det_scores_inds[:, 1]]
                     det_boxes_so_top = np.hstack(
