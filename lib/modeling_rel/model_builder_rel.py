@@ -312,6 +312,8 @@ class Generalized_RCNN(nn.Module):
             det_labels = rpn_ret['labels_int32'][fg_inds]
             det_scores = F.softmax(cls_score[fg_inds], dim=1)
             rel_ret = self.RelPN(det_rois, det_labels, det_scores, im_info, dataset_name, roidb)
+            logger.info('rel_ret')
+            print(rel_ret)
             if cfg.MODEL.ADD_SO_SCORES:
                 sbj_feat = self.S_Head(blob_conv, rel_ret, rois_name='sbj_rois', use_relu=use_relu)
                 obj_feat = self.O_Head(blob_conv, rel_ret, rois_name='obj_rois', use_relu=use_relu)
