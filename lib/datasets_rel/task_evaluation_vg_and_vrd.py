@@ -26,7 +26,7 @@ np.set_printoptions(precision=3)
 logger = logging.getLogger(__name__)
 
 
-topk = 100
+topk = 10
 
 
 def eval_rel_results(all_results, output_dir, do_val):
@@ -80,10 +80,10 @@ def eval_rel_results(all_results, output_dir, do_val):
                     det_labels_sbj = res['sbj_labels']  # (#num_rel,)
                     det_labels_obj = res['obj_labels']  # (#num_rel,)
                     logger.info('sbj_scores')
-                    det_scores_sbj = res['sbj_scores']  # (#num_rel,)
+                    det_scores_sbj = res['sbj_scores']  # (#num_rel,) 0.495 0, 111
                     det_scores_obj = res['obj_scores']  # (#num_rel,)
                     if 'prd_scores_ttl' in res:
-                        # [51]
+                        # 2 * [51]
 
                         det_scores_prd = res['prd_scores_ttl'][:, 1:]
                     else:
@@ -93,11 +93,17 @@ def eval_rel_results(all_results, output_dir, do_val):
                     det_scores_prd = -np.sort(-det_scores_prd, axis=1)
                     # [s, R(PREDICATE), O]
                     det_scores_so = det_scores_sbj * det_scores_obj #
-                    det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k]
+                    det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k] #
+                    logger.info('det_scores_spo')
+                    # print(det_scores_spo) # column vector
                     logger.info('det_scores_spo')
                     print(det_scores_spo)
                     det_scores_inds = argsort_desc(det_scores_spo)[:topk]
+                    logger.info('det_scores_inds')
+                    print(det_scores_inds)
                     det_scores_top = det_scores_spo[det_scores_inds[:, 0], det_scores_inds[:, 1]]
+                    logger.info('det_scores_top')
+                    print(det_scores_top)
                     det_boxes_so_top = np.hstack(
                         (det_boxes_sbj[det_scores_inds[:, 0]], det_boxes_obj[det_scores_inds[:, 0]]))
                     det_labels_p_top = det_labels_prd[det_scores_inds[:, 0], det_scores_inds[:, 1]]
