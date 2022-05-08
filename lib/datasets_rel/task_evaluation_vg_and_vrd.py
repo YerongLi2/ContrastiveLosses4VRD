@@ -83,7 +83,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                     det_scores_sbj = res['sbj_scores']  # (#num_rel,) 0.495, 0.495 / prompt 1
                     det_scores_obj = res['obj_scores']  # (#num_rel,) 0.083, 0.035 / prompt 2
                     try:
-                        assert np.array_equal(res['sbj_boxes'], res['gt_sbj_boxes'])
+                        assert (res['sbj_boxes']==res['gt_sbj_boxes']).all()
                     except:
                         import traceback; traceback.print_exc()
                         print(res['sbj_boxes'])
