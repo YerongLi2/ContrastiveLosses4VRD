@@ -85,7 +85,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                     try:
                         assert np.array_equal(res['sbj_boxes'], res['gt_sbj_boxes'])
                     except:
-                        import trackback; trackback.print_exc()
+                        import traceback; traceback.print_exc()
                         print(res['sbj_boxes'])
                         print(res['gt_sbj_boxes'])
                         sys.exit()
