@@ -30,27 +30,21 @@ topk = 100
 
 
 def eval_rel_results(all_results, output_dir, do_val):
-    logger.info('all results...')
-    # print(type(all_results))
-    print(all_results[1])
-    # print(len(all_res0pults[0]['prd_scores']))
-    # print(all_results[0]['prd_scores'])
-    # sys.exit()
-    ## Testing configuration
+    logger.info('all_results')
+    print(all_results[0])
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20)
     elif cfg.TEST.DATASETS[0].find('vrd') >= 0:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 70)
     else:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9)
-        
+
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
         eval_sets = (False,)
     else:
         eval_sets = (False, True)
 
     for phrdet in eval_sets:
-    
         eval_metric = 'phrdet' if phrdet else 'reldet'
         print('================== {} =================='.format(eval_metric))
 
@@ -64,8 +58,7 @@ def eval_rel_results(all_results, output_dir, do_val):
             topk_dets = []
             for im_i, res in enumerate(tqdm(all_results)):
 
-                # in oi_all_rel some images have no dets'
-                # print(res['prd_scores'] is None)
+                # in oi_all_rel some images have no dets
                 if res['prd_scores'] is None:
                     det_boxes_s_top = np.zeros((0, 4), dtype=np.float32)
                     det_boxes_o_top = np.zeros((0, 4), dtype=np.float32)
@@ -78,9 +71,8 @@ def eval_rel_results(all_results, output_dir, do_val):
                     det_boxes_obj = res['obj_boxes']  # (#num_rel, 4)
                     det_labels_sbj = res['sbj_labels']  # (#num_rel,)
                     det_labels_obj = res['obj_labels']  # (#num_rel,)
-                    # logger.info('sbj_scores')
-                    det_scores_sbj = res['sbj_scores']  # (#num_rel,) 0.495, 0.495 / prompt 1
-                    det_scores_obj = res['obj_scores']  # (#num_rel,) 0.083, 0.035 / prompt 2
+                    det_scores_sbj = res['sbj_scores']  # (#num_rel,)
+                    det_scores_obj = res['obj_scores']  # (#num_rel,)
                     try:
                         assert np.allclose(res['sbj_boxes'],res['gt_sbj_boxes'])
                     except:
