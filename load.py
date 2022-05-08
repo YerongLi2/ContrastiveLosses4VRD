@@ -1,7 +1,7 @@
 import json
 import os
-filename = os.getenv('HOME')+'/data/vrd/train_fname_mapping.json'
+filename = os.getenv('HOME')+'/data/vrd/rel_annotations_val.json'
 data = json.load(open(filename, 'r'))
-print(len(data.keys()))
-print(len(set(data.values())))
+print(data['2315355.jpg'])
+# print(len(set(data.values())))
 # print(data)
