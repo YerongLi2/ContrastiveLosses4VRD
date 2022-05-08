@@ -235,7 +235,7 @@ def test_net(
     all_results = [None for _ in range(num_images)]
     timers = defaultdict(Timer)
     # for i, entry in enumerate(roidb):
-    for i, entry in enumerate(roidb[:1000]):
+    for i, entry in enumerate(roidb):
         box_proposals = None
         ## Read the image
         im = cv2.imread(entry['image'])
