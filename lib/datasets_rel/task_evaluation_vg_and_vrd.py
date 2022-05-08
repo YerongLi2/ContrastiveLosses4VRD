@@ -88,6 +88,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                         import traceback; traceback.print_exc()
                         print(res['sbj_boxes'])
                         print(res['gt_sbj_boxes'])
+                        print((res['sbj_boxes']==res['gt_sbj_boxes']).all())
                         sys.exit()
                     if 'prd_scores_ttl' in res:
                         # 2 * [51]
