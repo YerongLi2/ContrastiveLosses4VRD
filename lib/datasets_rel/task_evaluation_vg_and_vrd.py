@@ -104,7 +104,8 @@ def eval_rel_results(all_results, output_dir, do_val):
                     logger.info('det_scores_inds')
                     print(det_scores_inds)
                     det_scores_top = det_scores_spo[det_scores_inds[:, 0], det_scores_inds[:, 1]]
-                    logger.info('det_scores_top')   det_labels_prd = np.argsort(-det_scores_prd, axis=1)
+                    logger.info('det_scores_top')
+                    det_labels_prd = np.argsort(-det_scores_prd, axis=1)
                     det_scores_prd = -np.sort(-det_scores_prd, axis=1)
                     # [s, R(PREDICATE), O]
                     det_scores_so = det_scores_sbj * det_scores_obj #
