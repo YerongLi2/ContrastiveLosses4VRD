@@ -260,8 +260,8 @@ class Generalized_RCNN(nn.Module):
                 p.requires_grad = False
 
     def forward(self, data, im_info, do_vis=False, dataset_name=None, roidb=None, use_gt_labels=False, **rpn_kwargs):
-        logger.info("forward Generalized_RCNN")
-        print('Generalized_RCNN')
+        # logger.info("forward Generalized_RCNN")
+        # print('Generalized_RCNN')
         # use_gt_labels = True
         # print(use_gt_labels)
         if cfg.PYTORCH_VERSION_LESS_THAN_040:
