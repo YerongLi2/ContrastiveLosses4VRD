@@ -162,7 +162,7 @@ if __name__ == '__main__':
             det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_sgcls.pkl')
     else:
         det_file = os.path.join(args.output_dir, 'rel_detections.pkl')
-    if False and os.path.exists(det_file): ## DEBUG
+    if os.path.exists(det_file): ## DEBUG
         logger.info('Loading results from {}'.format(det_file))
         with open(det_file, 'rb') as f:
             all_results = pickle.load(f)
@@ -170,7 +170,7 @@ if __name__ == '__main__':
         if args.dataset.find('vg') >= 0 or args.dataset.find('vrd') >= 0:
             task_evaluation_vg_and_vrd.eval_rel_results(all_results, args.output_dir, args.do_val)
         else:
-            task_evaluation_sg.eval_rel_results(all_results, args.output_dir, args.do_val, args.do_vis, args.do_special)
+            task_evaluation_sg.eval_rel_results(all_results[:100], args.output_dir, args.do_val, args.do_vis, args.do_special)
     else:
         run_inference(
             args,
