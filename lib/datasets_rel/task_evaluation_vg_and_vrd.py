@@ -10,7 +10,6 @@ import numpy as np
 import logging
 from six.moves import cPickle as pickle
 import json
-import sys
 import csv
 from tqdm import tqdm
 
@@ -30,8 +29,7 @@ topk = 100
 
 
 def eval_rel_results(all_results, output_dir, do_val):
-    logger.info('all_results')
-    print(all_results[0])
+
     if cfg.TEST.DATASETS[0].find('vg') >= 0:
         prd_k_set = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20)
     elif cfg.TEST.DATASETS[0].find('vrd') >= 0:
@@ -56,8 +54,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                 all_gt_cnt = 0
 
             topk_dets = []
-            for im_i, res in enumerate(tqdm(all_results[:100])):
-            # for im_i, res in enumerate(tqdm(all_results)):
+            for im_i, res in enumerate(tqdm(all_results)):
 
                 # in oi_all_rel some images have no dets
                 if res['prd_scores'] is None:
@@ -70,59 +67,25 @@ def eval_rel_results(all_results, output_dir, do_val):
                 else:
                     det_boxes_sbj = res['sbj_boxes']  # (#num_rel, 4)
                     det_boxes_obj = res['obj_boxes']  # (#num_rel, 4)
-                    det_labels_sbj = res['sbj_labels']  # (#num_rel,) 1 - 150 133, gt 151
-                    det_labels_obj = res['obj_labels']  # (#num_rel,) 1 - 150
+                    det_labels_sbj = res['sbj_labels']  # (#num_rel,)
+                    det_labels_obj = res['obj_labels']  # (#num_rel,)
                     det_scores_sbj = res['sbj_scores']  # (#num_rel,)
                     det_scores_obj = res['obj_scores']  # (#num_rel,)
-                    try:
-                        assert np.allclose(res['sbj_boxes'],res['gt_sbj_boxes'])
-                    except:
-                        import traceback; traceback.print_exc()
-                        print(res['sbj_boxes'])
-                        print(res['gt_sbj_boxes'])
-                        print(np.allclose(res['sbj_boxes'],res['gt_sbj_boxes']))
-                        sys.exit()
                     if 'prd_scores_ttl' in res:
-                        # 2 * [51]
-                        # has / holding
-                        det_scores_prd = res['prd_scores_ttl'][:, 1:]   # prompt 3
+                        det_scores_prd = res['prd_scores_ttl'][:, 1:]
                     else:
                         det_scores_prd = res['prd_scores'][:, 1:]
 
                     det_labels_prd = np.argsort(-det_scores_prd, axis=1)
                     det_scores_prd = -np.sort(-det_scores_prd, axis=1)
-                    # [s, R(PREDICATE), O]
-                    det_scores_so = det_scores_sbj * det_scores_obj #
-                    det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k] #
-                    # logger.info('det_scores_spo')
-                    # print(det_scores_spo) # column vector
-                    # logger.info('det_scores_spo')
-                    # print(det_scores_spo)
+
+                    det_scores_so = det_scores_sbj * det_scores_obj
+                    det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k]
                     det_scores_inds = argsort_desc(det_scores_spo)[:topk]
-                    # logger.info('det_scores_inds')
-                    # print(det_scores_inds)
                     det_scores_top = det_scores_spo[det_scores_inds[:, 0], det_scores_inds[:, 1]]
-                    # logger.info('det_scores_top')
-                    det_labels_prd = np.argsort(-det_scores_prd, axis=1)
-                    det_scores_prd = -np.sort(-det_scores_prd, axis=1)
-                    # [s, R(PREDICATE), O]
-                    det_scores_so = det_scores_sbj * det_scores_obj #
-                    det_scores_spo = det_scores_so[:, None] * det_scores_prd[:, :prd_k] #
-                    # logger.info('det_scores_spo')
-                    # print(det_scores_spo) # column vector
-                    # logger.info('det_scores_spo')
-                    # print(det_scores_spo)
-                    det_scores_inds = argsort_desc(det_scores_spo)[:topk]
-                    # logger.info('det_scores_inds')
-                    # print(det_scores_top)
                     det_boxes_so_top = np.hstack(
                         (det_boxes_sbj[det_scores_inds[:, 0]], det_boxes_obj[det_scores_inds[:, 0]]))
-
-
                     det_labels_p_top = det_labels_prd[det_scores_inds[:, 0], det_scores_inds[:, 1]]
-
-
-
                     det_labels_spo_top = np.vstack(
                         (det_labels_sbj[det_scores_inds[:, 0]], det_labels_p_top, det_labels_obj[det_scores_inds[:, 0]])).transpose()
 
@@ -170,7 +133,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                         else:
                             match = []
                         recalls[k] += len(match)
-                    # k _ 20
+
                     topk_dets[-1].update(dict(gt_boxes_sbj=gt_boxes_sbj,
                                               gt_boxes_obj=gt_boxes_obj,
                                               gt_labels_sbj=gt_labels_sbj,
@@ -197,12 +160,12 @@ def _compute_pred_matches(gt_triplets, pred_triplets,
     """
     Given a set of predicted triplets, return the list of matching GT's for each of the
     given predictions
-    :param gt_triplets: 
-    :param pred_triplets: 
-    :param gt_boxes: 
-    :param pred_boxes: 
-    :param iou_thresh: 
-    :return: 
+    :param gt_triplets:
+    :param pred_triplets:
+    :param gt_boxes:
+    :param pred_boxes:
+    :param iou_thresh:
+    :return:
     """
     # This performs a matrix multiplication-esque thing between the two arrays
     # Instead of summing, we want the equality, so we reduce in that way
@@ -210,9 +173,6 @@ def _compute_pred_matches(gt_triplets, pred_triplets,
     keeps = intersect_2d(gt_triplets, pred_triplets)
     gt_has_match = keeps.any(1)
     pred_to_gt = [[] for x in range(pred_boxes.shape[0])]
-    # logger.info('Computing matches...')
-    # print(gt_boxes)
-    # print(pred_boxes)
     for gt_ind, gt_box, keep_inds in zip(np.where(gt_has_match)[0],
                                          gt_boxes[gt_has_match],
                                          keeps[gt_has_match],
