@@ -56,7 +56,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                 all_gt_cnt = 0
 
             topk_dets = []
-            for im_i, res in enumerate(tqdm(all_results)):
+            for im_i, res in enumerate(tqdm(all_results[:100])):
             # for im_i, res in enumerate(tqdm(all_results)):
 
                 # in oi_all_rel some images have no dets
@@ -170,7 +170,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                         else:
                             match = []
                         recalls[k] += len(match)
-
+                    # k _ 20
                     topk_dets[-1].update(dict(gt_boxes_sbj=gt_boxes_sbj,
                                               gt_boxes_obj=gt_boxes_obj,
                                               gt_labels_sbj=gt_labels_sbj,
