@@ -71,7 +71,8 @@ def parse_args():
         '--use_gt_boxes', dest='use_gt_boxes', help='use gt boxes for sgcls/prdcls', action='store_true')
     parser.add_argument(
         '--use_gt_labels', dest='use_gt_labels', help='use gt boxes for sgcls/prdcls', action='store_true')
-
+    parser.add_argument(
+        '--reg', dest='reg', help='regenerate', action='store_true')
     return parser.parse_args()
 
 
@@ -162,7 +163,7 @@ if __name__ == '__main__':
             det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_sgcls.pkl')
     else:
         det_file = os.path.join(args.output_dir, 'rel_detections.pkl')
-    if False and os.path.exists(det_file): ## DEBUG
+    if not args.reg and os.path.exists(det_file): ## DEBUG
         logger.info('Loading results from {}'.format(det_file))
         with open(det_file, 'rb') as f:
             all_results = pickle.load(f)
