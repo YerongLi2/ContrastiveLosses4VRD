@@ -70,8 +70,8 @@ def eval_rel_results(all_results, output_dir, do_val):
                 else:
                     det_boxes_sbj = res['sbj_boxes']  # (#num_rel, 4)
                     det_boxes_obj = res['obj_boxes']  # (#num_rel, 4)
-                    det_labels_sbj = res['sbj_labels']  # (#num_rel,)
-                    det_labels_obj = res['obj_labels']  # (#num_rel,)
+                    det_labels_sbj = res['sbj_labels']  # (#num_rel,) 1 - 150 133, gt 151
+                    det_labels_obj = res['obj_labels']  # (#num_rel,) 1 - 150
                     det_scores_sbj = res['sbj_scores']  # (#num_rel,)
                     det_scores_obj = res['obj_scores']  # (#num_rel,)
                     try:
@@ -84,7 +84,7 @@ def eval_rel_results(all_results, output_dir, do_val):
                         sys.exit()
                     if 'prd_scores_ttl' in res:
                         # 2 * [51]
-
+                        # has / holding
                         det_scores_prd = res['prd_scores_ttl'][:, 1:]   # prompt 3
                     else:
                         det_scores_prd = res['prd_scores'][:, 1:]
