@@ -234,7 +234,7 @@ def test_net(
     num_images = len(roidb)
     all_results = [None for _ in range(num_images)]
     timers = defaultdict(Timer)
-    # for i, entry in enumerate(roidb):
+    # for i, entry in enumerate(roidb[:100]):
     for i, entry in enumerate(roidb):
         box_proposals = None
         ## Read the image
