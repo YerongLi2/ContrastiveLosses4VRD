@@ -21,7 +21,11 @@ from core.test_engine_rel import run_inference
 import utils.logging
 
 from datasets_rel import task_evaluation_sg as task_evaluation_sg
-from datasets_rel import task_evaluation_vg_and_vrd as task_evaluation_vg_and_vrd
+
+# !!!!!!! Changed by Wentao:
+# from datasets_rel import task_evaluation_vg_and_vrd as task_evaluation_vg_and_vrd
+# from datasets_rel import task_evaluation_vg_and_vrd_wentao as task_evaluation_vg_and_vrd
+from datasets_rel import task_evaluation_vg_and_vrd_with_vis_prd_k_20_wentao as task_evaluation_vg_and_vrd
 
 # OpenCL may be enabled by default in OpenCV3; disable it because it's not
 # thread safe and causes unwanted GPU memory allocations.
@@ -155,14 +159,18 @@ if __name__ == '__main__':
     # manually set args.cuda
     args.cuda = True
 
-    if args.use_gt_boxes:
-        ## buggy
-        if args.use_gt_labels:
-            det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_prdcls.pkl')
-        else:
-            det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_sgcls.pkl')
-    else:
-        det_file = os.path.join(args.output_dir, 'rel_detections.pkl')
+    # if args.use_gt_boxes:
+    #     ## buggy
+    #     if args.use_gt_labels:
+    #         det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_prdcls.pkl')
+    #     else:
+    #         det_file = os.path.join(args.output_dir, 'rel_detections_gt_boxes_sgcls.pkl')
+    # else:
+    #     det_file = os.path.join(args.output_dir, 'rel_detections.pkl')
+    
+
+    det_file = '/shared/home/yerong/prompt-vr/Output/prompts/results1.pkl'
+
     if not args.reg and os.path.exists(det_file): ## DEBUG
         logger.info('Loading results from {}'.format(det_file))
         with open(det_file, 'rb') as f:
